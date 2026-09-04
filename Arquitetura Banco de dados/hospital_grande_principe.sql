@@ -1,20 +1,20 @@
---CREATE DATABASE
+-- CREATE DATABASE
 
-CREATE DATABASE hospital_grande_principe;
+CREATE DATABASE IF NOT EXISTS hospital_grande_principe;
 USE hospital_grande_principe;
 
---CREATE TABLE
+-- CREATE TABLE
 
-CREATE TABLE funcionarios (
+CREATE TABLE IF NOT EXISTS funcionarios (
     id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(30) NOT NULL,
     contato VARCHAR(20) NOT NULL,
     cpf VARCHAR(14) NOT NULL,
 
-    UNIQUE (cpf) --UNIQUE TO MAKE "cpf" A NON REPEATABLE KEY
+    UNIQUE (cpf) -- UNIQUE TO MAKE "cpf" A NON REPEATABLE KEY
 );
 
-CREATE TABLE medicos (
+CREATE TABLE IF NOT EXISTS medicos (
     id_funcionario INT PRIMARY KEY,
 
     FOREIGN KEY (id_funcionario)
@@ -22,7 +22,7 @@ CREATE TABLE medicos (
         ON DELETE CASCADE
 );
 
-CREATE TABLE enfermeiros (
+CREATE TABLE IF NOT EXISTS enfermeiros (
     id_funcionario INT PRIMARY KEY,
 
     FOREIGN KEY (id_funcionario)
@@ -30,7 +30,7 @@ CREATE TABLE enfermeiros (
         ON DELETE CASCADE
 );
 
-CREATE TABLE recepcionistas (
+CREATE TABLE IF NOT EXISTS recepcionistas (
     id_funcionario INT PRIMARY KEY,
 
     FOREIGN KEY (id_funcionario)
@@ -38,14 +38,14 @@ CREATE TABLE recepcionistas (
         ON DELETE CASCADE
 );
 
-CREATE TABLE medicamentos (
+CREATE TABLE IF NOT EXISTS medicamentos (
     id_medicamento INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(30) NOT NULL,
     tipo VARCHAR(30) NOT NULL,
     estoque INT NOT NULL
 );
 
-CREATE TABLE pacientes (
+CREATE TABLE IF NOT EXISTS pacientes (
     id_paciente INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(30) NOT NULL,
     contato VARCHAR(20) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE pacientes (
     UNIQUE (cpf)
 );
 
-CREATE TABLE atendimento (
+CREATE TABLE IF NOT EXISTS atendimento (
     id_atendimento INT PRIMARY KEY AUTO_INCREMENT,
     id_paciente INT NOT NULL,
     id_funcionario INT NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE atendimento (
         ON DELETE CASCADE
 );
 
-CREATE TABLE consulta (
+CREATE TABLE IF NOT EXISTS consulta (
     id_consulta INT PRIMARY KEY AUTO_INCREMENT,
     id_atendimento INT NOT NULL,
     id_funcionario INT NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE consulta (
     UNIQUE (id_atendimento)
 );
 
-CREATE TABLE internamento (
+CREATE TABLE IF NOT EXISTS internamento (
     id_internamento INT PRIMARY KEY AUTO_INCREMENT,
     id_consulta INT NOT NULL,
     id_funcionario INT NOT NULL,
@@ -105,13 +105,13 @@ CREATE TABLE internamento (
     UNIQUE (id_consulta)
 );
 
-CREATE TABLE prescricao (
+CREATE TABLE IF NOT EXISTS prescricao (
     id_prescricao INT PRIMARY KEY AUTO_INCREMENT,
     id_consulta INT NOT NULL,
     id_medicamento INT NOT NULL,
     id_funcionario INT NOT NULL,
 
-    FOREIGN KEY (id_consulta)atendimento
+    FOREIGN KEY (id_consulta)
         REFERENCES consulta(id_consulta)
         ON DELETE CASCADE,
 
@@ -136,3 +136,50 @@ SELECT * FROM atendimento;
 SELECT * FROM consulta;
 SELECT * FROM internamento;
 SELECT * FROM prescricao;
+
+-- INSERT
+
+INSERT INTO funcionarios (nome, contato, cpf) VALUES
+('Alice', '(41)23265-1425', '123.456.789-01'), 
+('Bob', '(41)11224-4152', '234.567.890-12'), 
+('Carlos', '(41)45689-1123', '345.678.901-23');
+
+INSERT INTO medicos (id_funcionario) 
+    VALUES (1);
+
+INSERT INTO enfermeiros (id_funcionario) 
+    VALUES (2);
+
+INSERT INTO recepcionistas (id_funcionario) 
+    VALUES (3);
+
+INSERT INTO medicamentos (nome, tipo, estoque) 
+    VALUES ('Dipirona', 'Analgésico', 150),
+    ('Tadalafila', 'comprimido', 80),
+    ('Soro', 'Solução', 200);
+
+INSERT INTO pacientes (nome, contato, cpf) 
+    VALUES ('Alice', '(41)11212-1212', '611.561.223-45'),
+    ('Bob', '(41)12131-1223', '890.123.456-78');
+
+INSERT INTO atendimento (id_paciente, id_funcionario, horario, codigo, motivo) 
+    VALUES (1, 3, '08:30', 101, 'Dor física'),
+    (2, 3, '09:15', 102, 'Dor psicológica');
+
+INSERT INTO consulta (id_atendimento, id_funcionario, diagnostico) 
+    VALUES (1, 1, 'Doença venéria'),
+    (2, 1, 'Infecção');
+
+INSERT INTO internamento (id_consulta, id_funcionario, data_saida) 
+    VALUES (1, 2, NULL), 
+    (2, 2, '2026-09-05'); 
+
+INSERT INTO prescricao (id_consulta, id_medicamento, id_funcionario) 
+    VALUES (1, 1, 2),
+    (1, 3, 2),    
+    (2, 2, 2);
+    
+-- INSERT ERRADO:
+-- INSERT INTO funcionarios (nome, contato, cpf) VALUES
+-- ('Daniel', '+55 ( 41 ) 23265 - 1425', '123.456.789-01'), 
+-- mesmo cpf e numero maior que varchar estabelecido
