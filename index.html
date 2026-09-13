@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>PÁGINA</h1>
+        <button onclick="setInterval(bandera_vermelha, 100)"> RED FLAG </button>
+        <div id="id2"></div>
+        <script>
+            function bandera_vermelha() {
+                let new_element = document.createElement('a');
+                new_element.textContent = "";
+                let fs = 16 + (Math.random() * 1000);
+                let r = Math.random() * 256;
+                let g = Math.random() * 256;
+                let b = Math.random() * 256;
+                new_element.style.backgroundColor = "rgb("+ r + ","+ g +","+ b +")"
+                new_element.style.fontSize = fs;
+                let d = document.querySelector("#id2");
+                d.appendChild(new_element);
+            }
+        </script>
+    </body>
+</html>

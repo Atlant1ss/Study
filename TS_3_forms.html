@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <style>
+        * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+
+    column-gap: 20px;
+    width: 280px;
+    height: 40px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+
+}
+
+input::placeholder {
+    color: #777;
+}
+
+button {
+
+    width: 100px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #088A68;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+button:active {
+
+    background-color: #04B486;
+
+}
+
+input[type="email"]:invalid {
+
+    border: 2px solid #FA8588;
+
+}
+
+input:focus {
+ 
+    outline: none;
+    border-color: #888;
+
+}
+    </style>
+    <head style="text-align: center;">
+        formulario
+    </head>
+    <body>
+        <input type="text" placeholder="Nome"/> 
+        <input type="text" placeholder="Sobrenome"/> 
+        <input type="email" placeholder="Email"/>
+        <input type="number" placeholder="Matrícula"/> 
+        <input type="text" placeholder="Usuário"/>     
+        <input type="password" placeholder="Senha"/> 
+        <input type="password" placeholder="Confirme a senha"/> 
+        <button for="toggle">Salvar</button>
+    </body>
+</html>

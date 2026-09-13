@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo - Cibersegurança</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e293b; /* Slate 800 - Escuro e profissional */
+            --secondary-color: #3b82f6; /* Blue 500 - Destaque em TI */
+            --text-main: #334155;
+            --text-light: #94a3b8;
+            --bg-sidebar: #f8fafc; /* Slate 50 */
+            --bg-main: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            color: var(--text-main);
+        }
+
+        .resume-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--bg-main);
+            display: flex;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 1122px; /* Proporção A4 */
+        }
+
+        /* SIDEBAR (Esquerda) */
+        .sidebar {
+            width: 35%;
+            background-color: var(--bg-sidebar);
+            padding: 40px 30px;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .profile-img-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            margin: 0 auto 30px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--secondary-color);
+        }
+
+        .profile-img-container i {
+            font-size: 60px;
+            color: #94a3b8;
+        }
+
+        .sidebar-section {
+            margin-bottom: 35px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .contact-list, .skills-list, .lang-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            word-break: break-word;
+        }
+
+        .contact-list li i {
+            width: 25px;
+            color: var(--secondary-color);
+            font-size: 16px;
+        }
+
+        .skills-list li {
+            font-size: 14px;
+            margin-bottom: 10px;
+            background-color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border-left: 3px solid var(--secondary-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-weight: 600;
+        }
+
+        .skills-list li span {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .lang-list li {
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .lang-level {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        /* MAIN CONTENT (Direita) */
+        .main-content {
+            width: 65%;
+            padding: 50px 40px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .name {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .job-title {
+            font-size: 20px;
+            color: var(--secondary-color);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .main-section {
+            margin-bottom: 35px;
+        }
+
+        .main-section-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-section-title i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+
+        .summary-text {
+            font-size: 14.5px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .timeline-item {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid #e2e8f0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+        }
+
+        .item-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .item-subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .item-date {
+            font-size: 13px;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .item-desc {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .cert-item {
+            margin-bottom: 15px;
+        }
+
+        .cert-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .cert-issuer {
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        /* Responsividade básica */
+        @media (max-width: 768px) {
+            .resume-container {
+                flex-direction: column;
+            }
+            .sidebar, .main-content {
+                width: 100%;
+            }
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-container">
+        <!-- BARRA LATERAL -->
+        <div class="sidebar">
+            <div class="profile-img-container">
+                <i class="fa-solid fa-user"></i>
+                <!-- Para usar uma foto real, substitua o ícone acima por: <img src="sua-foto.jpg" style="width:100%; height:100%; object-fit:cover;"> -->
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Contato</h3>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-phone"></i> (11) 99999-9999</li>
+                    <li><i class="fa-solid fa-envelope"></i> seuemail@email.com</li>
+                    <li><i class="fa-brands fa-linkedin"></i> linkedin.com/in/seuperfil</li>
+                    <li><i class="fa-solid fa-location-dot"></i> São Paulo, SP</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Principais Skills</h3>
+                <ul class="skills-list">
+                    <li>Infraestrutura de Redes <span>Cisco Packet Tracer, Topologias</span></li>
+                    <li>Segurança da Informação <span>Análise de riscos, Proteção de dados</span></li>
+                    <li>Troubleshooting <span>Diagnóstico e resolução de falhas</span></li>
+                    <li>Customer Success <span>Excelência em atendimento (B2B/B2C)</span></li>
+                    <li>Soft Skills <span>Resolução de problemas, Adaptabilidade, Comunicação intercultural</span></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Idiomas</h3>
+                <ul class="lang-list">
+                    <li>Inglês <span class="lang-level">Avançado (B2)</span></li>
+                    <li>Português <span class="lang-level">Nativo</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="main-content">
+            <div class="header">
+                <h1 class="name">Seu Nome<br>Aqui</h1>
+                <h2 class="job-title">Em transição para Cibersegurança & Redes</h2>
+            </div>
+
+            <div class="main-section">
+                <h3 class="main-section-title"><i class="fa-solid fa-user-tie"></i> Resumo Profissional</h3>
+                <p class="summary-text">
+                    Estudante de Cibersegurança apaixonado(a) por tecnologia, com sólida base técnica em configuração e simulação de redes (Cisco Packet Tracer). Possuo vivência internacional no Canadá, onde desenvolvi forte adaptabilidade, inteligência cultural e inglês avançado (B2). Complementei minha formação com certificação internacional em Excelência em Serviços (ILAC), unindo capacidade analítica para *troubleshooting* com empatia e foco na experiência do usuário. Busco uma oportunidade de estágio em Segurança da Informação ou Infraestrutura para aplicar conhecimentos técnicos em ambientes corporativos dinâmicos.
+                </p>
+            </div>
+
+            <div class="main-section">
+                <h3 class="main-section-title"><i class="fa-solid fa-graduation-cap"></i> Formação Acadêmica</h3>
+
+                <div class="timeline-item">
+                    <h4 class="item-title">Graduação Tecnológica em Cibersegurança</h4>
+                    <p class="item-subtitle">Nome da Instituição / Universidade</p>
+                    <p class="item-date">Conclusão prevista: Dezembro / 202X</p>
+                    <p class="item-desc">Estudo focado em proteção de dados, análise de vulnerabilidades, redes de computadores, políticas de segurança da informação e criptografia.</p>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h3 class="main-section-title"><i class="fa-solid fa-certificate"></i> Certificações Técnicas</h3>
+
+                <div class="cert-item">
+                    <h4 class="cert-title">Getting Started with Cisco Packet Tracer</h4>
+                    <p class="cert-issuer">Cisco Networking Academy | 202X</p>
+                    <p class="item-desc" style="font-size: 13px; margin-top: 4px; color: var(--text-light);">Foco em topologias, simulação e diagnóstico de redes.</p>
+                </div>
+
+                <div class="cert-item">
+                    <h4 class="cert-title">Introduction to Cisco Packet Tracer</h4>
+                    <p class="cert-issuer">Cisco Networking Academy | 202X</p>
+                    <p class="item-desc" style="font-size: 13px; margin-top: 4px; color: var(--text-light);">Fundamentos práticos de infraestrutura de TI.</p>
+                </div>
+
+                <div class="cert-item">
+                    <h4 class="cert-title">Service Excellence for Business</h4>
+                    <p class="cert-issuer">ILAC - International Language Academy of Canada | 202X</p>
+                    <p class="item-desc" style="font-size: 13px; margin-top: 4px; color: var(--text-light);">Técnicas avançadas de atendimento ao cliente corporativo e retenção.</p>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h3 class="main-section-title"><i class="fa-solid fa-globe"></i> Vivência Internacional</h3>
+
+                <div class="timeline-item">
+                    <h4 class="item-title">Intercâmbio de Estudos e Imersão Cultural</h4>
+                    <p class="item-subtitle">Canadá (Cidade, Província)</p>
+                    <p class="item-date">Ano de Início - Ano de Término</p>
+                    <p class="item-desc">Desenvolvimento de fluência no idioma inglês (nível atual B2), vivência em ambiente multicultural, ganho de autonomia e fortalecimento de habilidades de comunicação interpessoal fora da zona de conforto.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora</title>
+<!--<link rel="stylesheet" href="style.css">-->
+    <Style>
+        * {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        }
+
+        .calculadora {
+        background-color: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .linha {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        }
+
+        .linha:last-child {
+        margin-bottom: 0;
+        }
+
+        .valor1 .valor2 {
+        height: 40px;
+        width: 60px;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        text-align: center;
+        font-size: 14px;
+        padding: 0 5px;
+        }
+
+        .valor1:focus .valor2:focus {
+        outline: none;
+        border-color: #ff8000;
+        background-color: #fff;
+        }
+
+        .op {
+        width: 60px;
+        height: 37px;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+        }
+
+        .op:hover {
+        opacity: 0.85;
+        }
+
+        .op-soma {
+        background-color: #ee5000;
+        }
+
+        .op-outros {
+        background-color: #ff8000;
+        }
+
+        .igual {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        }
+
+        .resultado {
+        height: 40px;
+        width: 140px;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        text-align: center;
+        font-size: 10px;
+        color: #333;
+        padding: 0 5px;
+        }
+
+        .resultado::placeholder {
+        color: #aaa;
+        }
+
+        .limpar {
+        width: 90px;
+        height: 50px;
+        background-color: #ff8000;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+        }
+
+        .limpar:hover {
+        opacity: 0.85;
+        }
+    </Style>
+
+</head>
+<body>
+
+  <div class="calculadora">
+
+    <div class="linha" data-linha="1">
+      <input type="number" class="valor1" size="3" placeholder="0">
+      <input type="number" class="valor2" size="3" placeholder="0">
+      <button class="op op-soma" data-op="+">+</button>
+      <span class="igual">=</span>
+      <input type="text" class="resultado" size="10" placeholder="Resultado" readonly>
+      <button class="limpar">Limpar</button>
+    </div>
+
+    <div class="linha" data-linha="2">
+      <input type="number" class="valor1" size="3" placeholder="0">
+      <input type="number" class="valor2" size="3" placeholder="0">
+      <button class="op op-outros" data-op="-">-</button>
+      <span class="igual">=</span>
+      <input type="text" class="resultado" size="10" placeholder="Resultado" readonly>
+      <button class="limpar">Limpar</button>
+    </div>
+
+    <div class="linha" data-linha="3">
+      <input type="number" class="valor1" size="3" placeholder="0">
+      <input type="number" class="valor2" size="3" placeholder="0">
+      <button class="op op-outros" data-op="*">*</button>
+      <span class="igual">=</span>
+      <input type="text" class="resultado" size="10" placeholder="Resultado" readonly>
+      <button class="limpar">Limpar</button>
+    </div>
+
+    <div class="linha" data-linha="4">
+      <input type="number" class="valor1" size="3" placeholder="0">
+      <input type="number" class="valor2" size="3" placeholder="0">
+      <button class="op op-outros" data-op="/">/</button>
+      <span class="igual">=</span>
+      <input type="text" class="resultado" size="10" placeholder="Resultado" readonly>
+      <button class="limpar">Limpar</button>
+    </div>
+
+  </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+  const linhas = document.querySelectorAll('.linha');
+
+  linhas.forEach(function (linha) {
+    const valor1 = linha.querySelector('.valor1');
+    const valor2 = linha.querySelector('.valor2');
+    const botaoOp = linha.querySelector('.op');
+    const resultado = linha.querySelector('.resultado');
+    const botaoLimpar = linha.querySelector('.limpar');
+
+    botaoOp.addEventListener('click', function () {
+      const num1 = parseFloat(valor1.value);
+      const num2 = parseFloat(valor2.value);
+      const operacao = botaoOp.dataset.op;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultado.value = 'Erro';
+        return;
+      }
+
+      let res;
+      switch (operacao) {
+        case '+':
+          res = num1 + num2;
+          break;
+        case '-':
+          res = num1 - num2;
+          break;
+        case '*':
+          res = num1 * num2;
+          break;
+        case '/':
+          res = num2 === 0 ? 'Erro' : num1 / num2;
+          break;
+      }
+
+      resultado.value = res;
+    });
+
+    botaoLimpar.addEventListener('click', function () {
+      valor1.value = '';
+      valor2.value = '';
+      resultado.value = '';
+    });
+  });
+});
+</script>
+<!--<script src="script.js"></script>-->
+</body>
+</html>
